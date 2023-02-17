@@ -1,17 +1,17 @@
 <div id="app">
-    <h2>{{b}}</h2>
+    <h2>{{msg}}</h2>
 </div>
 <!-- <script type='text/javascript' src='../Users/myUserName/Desktop/myPage.js'></script> -->
 <script type='text/javascript' src='vue.js'></script>
 <script>
-    var local_data = { a: 1, b: "kkk" };
     const app = new Vue({
         el: '#app',
-        data: local_data
+        data: {
+            msg: "Hi, VUE!"
+        },
+        created: function () {
+            // `this` 指向 vm 实例
+            console.log('msg is: ' + this.msg)
+        }
     });
-    app.$watch('a', function (newVal, oldVal) {
-        console.log(newVal, oldVal);
-    });
-    app.$data.b = "123";
-    local_data.a = "local a changed";
 </script>
