@@ -1,5 +1,31 @@
 <div id="app">
     <h2>{{msg}}</h2>
+    <p class="titleFont">用双括号</p>
+    <p>Using mustaches: {{rawHtml}}</p>
+    <br />
+    <br />
+    <p class="titleFont">用 v-html 语法</p>
+    <p>Using v-html directive: <span v-html="rawHtml">1234</span></p>
+    <p v-html="rawHtml"></p>
+    <p v-html="rawHtml">Using v-html directive: <span>123</span></p>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <p class="titleFont">用 bind 语法</p>
+    <div class="blue">text</div>
+    <div v-bind:class="color_red">text</div>
+    <div v-bind:class="color_blue">text</div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <p class="titleFont">双括号使用表达式</p>
+    <p class="contentFont">{{number_100 + 1}}</p>
+    <p class="contentFont">{{ok ? 'YES' : 'NO'}}</p>
+    <p class="contentFont">{{message.split("").reverse().join('')}}</p>
 </div>
 <!-- <script type='text/javascript' src='../Users/myUserName/Desktop/myPage.js'></script> -->
 <script type='text/javascript' src='vue.js'></script>
@@ -7,11 +33,37 @@
     const app = new Vue({
         el: '#app',
         data: {
-            msg: "Hi, VUE!"
+            msg: "Hi, VUE!",
+            // rawHtml
+            rawHtml: '<span style="color:red"> this should be red</span>',
+            // style
+            color_blue: 'blue',
+            color_red: 'red',
+
+            number_100: 100,
+            ok: true,
+            message: 'a b c d e f g'
         },
-        created: function () {
-            // `this` 指向 vm 实例
-            console.log('msg is: ' + this.msg)
-        }
     });
 </script>
+
+<style type="text/css">
+    .titleFont {
+        font-size: xx-large;
+        color: royalblue;
+    }
+
+    .contentFont {
+        font-size: x-large;
+        color: royalblue;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .blue {
+        color: blue;
+        font-size: 50px;
+    }
+</style>
