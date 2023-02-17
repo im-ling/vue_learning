@@ -1,31 +1,59 @@
 <div id="app">
-    <h2>{{msg}}</h2>
-    <p class="titleFont">用双括号</p>
-    <p>Using mustaches: {{rawHtml}}</p>
-    <br />
-    <br />
-    <p class="titleFont">用 v-html 语法</p>
-    <p>Using v-html directive: <span v-html="rawHtml">1234</span></p>
-    <p v-html="rawHtml"></p>
-    <p v-html="rawHtml">Using v-html directive: <span>123</span></p>
+    <p class="titleFont">指令</p>
+    <p v-if="seen">123
+    <p class="contentFont">Seen as subview in vif</p>
+    <p v-if="seen" class="contentFont">Seen vif</p>
+    </p>
     <br />
     <br />
     <br />
     <br />
+
+    <p class="titleFont">动态绑定</p>
+    <a v-bind:href="baiduLink" class="contentFont">百度</a>
     <br />
-    <p class="titleFont">用 bind 语法</p>
-    <div class="blue">text</div>
-    <div v-bind:class="color_red">text</div>
-    <div v-bind:class="color_blue">text</div>
+    <!-- hrefattributename 必须全小写
+        在 DOM 中使用模板时 (直接在一个 HTML 文件里撰写模板)，还需要避免使用大写字符来命名键名，因为浏览器会把 attribute 名全部强制转为小写：
+    -->
+    <a v-bind:[hrefattributeName]="vueLink" class="contentFont"> hrefAttributeName </a>
+    <div v-on:click="click2" class="contentFont">
+        clickme
+    </div>
     <br />
     <br />
     <br />
+
+    <p class="titleFont">动态绑定缩写</p>
+    <a v-bind:href="baiduLink" class="contentFont">百度</a>
+    <br />
+    <a :href="baiduLink" class="contentFont">百度</a>
+    <!-- hrefattributename 必须全小写
+        在 DOM 中使用模板时 (直接在一个 HTML 文件里撰写模板)，还需要避免使用大写字符来命名键名，因为浏览器会把 attribute 名全部强制转为小写：
+    -->
     <br />
     <br />
-    <p class="titleFont">双括号使用表达式</p>
-    <p class="contentFont">{{number_100 + 1}}</p>
-    <p class="contentFont">{{ok ? 'YES' : 'NO'}}</p>
-    <p class="contentFont">{{message.split("").reverse().join('')}}</p>
+    <div v-on:click="click2" class="contentFont">
+        clickme
+    </div>
+    <div @click="click2" class="contentFont">
+        clickme
+    </div>
+    <br />
+    <br />
+    <br />
+
+
+    <p class="titleFont">修饰符（此处为stop）</p>
+    <!-- <a v-on:click="doSomething">...</a> -->
+    <div @click='click1'>
+        <div @click.stop="click2" class="contentFont">
+            clickme
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+
 </div>
 <!-- <script type='text/javascript' src='../Users/myUserName/Desktop/myPage.js'></script> -->
 <script type='text/javascript' src='vue.js'></script>
@@ -34,16 +62,22 @@
         el: '#app',
         data: {
             msg: "Hi, VUE!",
-            // rawHtml
-            rawHtml: '<span style="color:red"> this should be red</span>',
-            // style
-            color_blue: 'blue',
-            color_red: 'red',
-
-            number_100: 100,
-            ok: true,
-            message: 'a b c d e f g'
+            seen: false,
+            baiduLink: 'https://www.baidu.com',
+            vueLink: 'https://v2.cn.vuejs.org/',
+            hrefattributename: "href",
         },
+        methods: {
+            click1: function () {
+                console.log("click1 click");
+            },
+            click2: function () {
+                console.log("click2 click");
+            },
+            // hrefAttributeName: function () {
+            //     return 'href';
+            // }
+        }
     });
 </script>
 
@@ -54,7 +88,7 @@
     }
 
     .contentFont {
-        font-size: x-large;
+        font-size: 25;
         color: royalblue;
     }
 
