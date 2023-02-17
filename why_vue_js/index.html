@@ -1,59 +1,22 @@
 <div id="app">
-    <p class="titleFont">指令</p>
-    <p v-if="seen">123
-    <p class="contentFont">Seen as subview in vif</p>
-    <p v-if="seen" class="contentFont">Seen vif</p>
-    </p>
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <p class="titleFont">动态绑定</p>
-    <a v-bind:href="baiduLink" class="contentFont">百度</a>
-    <br />
-    <!-- hrefattributename 必须全小写
-        在 DOM 中使用模板时 (直接在一个 HTML 文件里撰写模板)，还需要避免使用大写字符来命名键名，因为浏览器会把 attribute 名全部强制转为小写：
-    -->
-    <a v-bind:[hrefattributeName]="vueLink" class="contentFont"> hrefAttributeName </a>
-    <div v-on:click="click2" class="contentFont">
-        clickme
+    <p class="titleFont"></p>
+    <div v-bind:class="{active:isActive, royalblue:isRoyalblue}" class="contentFont"
+        style="width:200px; height: 200px; text-align: center; line-height: 200px;">
+        hi Vue
     </div>
-    <br />
-    <br />
+
     <br />
 
-    <p class="titleFont">动态绑定缩写</p>
-    <a v-bind:href="baiduLink" class="contentFont">百度</a>
-    <br />
-    <a :href="baiduLink" class="contentFont">百度</a>
-    <!-- hrefattributename 必须全小写
-        在 DOM 中使用模板时 (直接在一个 HTML 文件里撰写模板)，还需要避免使用大写字符来命名键名，因为浏览器会把 attribute 名全部强制转为小写：
-    -->
-    <br />
-    <br />
-    <div v-on:click="click2" class="contentFont">
-        clickme
+    <div v-bind:class="[isActive?'active':'',isRoyalblue?'royalblue':'']" class="contentFont"
+        style="width:200px; height: 200px; text-align: center; line-height: 200px;">
+        hi Vue
     </div>
-    <div @click="click2" class="contentFont">
-        clickme
+
+    <br />
+
+    <div v-bind:style="{color:royalblueString, background:isActive ? '#ff000055':''}">
+        content2
     </div>
-    <br />
-    <br />
-    <br />
-
-
-    <p class="titleFont">修饰符（此处为stop）</p>
-    <!-- <a v-on:click="doSomething">...</a> -->
-    <div @click='click1'>
-        <div @click.stop="click2" class="contentFont">
-            clickme
-        </div>
-    </div>
-    <br />
-    <br />
-    <br />
-
 </div>
 <!-- <script type='text/javascript' src='../Users/myUserName/Desktop/myPage.js'></script> -->
 <script type='text/javascript' src='vue.js'></script>
@@ -61,22 +24,14 @@
     const app = new Vue({
         el: '#app',
         data: {
-            msg: "Hi, VUE!",
-            seen: false,
-            baiduLink: 'https://www.baidu.com',
-            vueLink: 'https://v2.cn.vuejs.org/',
-            hrefattributename: "href",
+            isActive: true,
+            isRoyalblue: true,
+            royalblueString: "royalblue"
         },
         methods: {
             click1: function () {
                 console.log("click1 click");
             },
-            click2: function () {
-                console.log("click2 click");
-            },
-            // hrefAttributeName: function () {
-            //     return 'href';
-            // }
         }
     });
 </script>
@@ -88,7 +43,10 @@
     }
 
     .contentFont {
-        font-size: 25;
+        font-size: 40;
+    }
+
+    .royalblue {
         color: royalblue;
     }
 
@@ -99,5 +57,9 @@
     .blue {
         color: blue;
         font-size: 50px;
+    }
+
+    .active {
+        background-color: #ff000055;
     }
 </style>
