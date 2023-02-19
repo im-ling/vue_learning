@@ -1,22 +1,49 @@
 <div id="app">
-    <p class="titleFont"></p>
-    <div v-bind:class="{active:isActive, royalblue:isRoyalblue}" class="contentFont"
-        style="width:200px; height: 200px; text-align: center; line-height: 200px;">
-        hi Vue
-    </div>
-
+    <p class="titleFont">v-if-else</p>
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>Oh no 😢</h1>
+    <br />
+    <br />
     <br />
 
-    <div v-bind:class="[isActive?'active':'',isRoyalblue?'royalblue':'']" class="contentFont"
-        style="width:200px; height: 200px; text-align: center; line-height: 200px;">
-        hi Vue
-    </div>
-
+    <p class="titleFont">v-if-template</p>
+    <template v-if="isTemplateOk">
+        <h1>Title</h1>
+        <p>Paragraph 1</p>
+        <p>Paragraph 2</p>
+    </template>
+    <br />
+    <br />
     <br />
 
-    <div v-bind:style="{color:royalblueString, background:isActive ? '#ff000055':''}">
-        content2
+
+    <p class="titleFont">v-else-if</p>
+    <div v-if="type === 'A'">
+        A
     </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Not A/B/C
+    </div>
+    <br />
+    <br />
+    <br />
+
+    <p class="titleFont">用 key 管理可复用的元素</p>
+    <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+    </template>
+    <template v-else>
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+    </template>
+    <button type="button" v-on:click="click1">Click Me!</button>
 </div>
 <!-- <script type='text/javascript' src='../Users/myUserName/Desktop/myPage.js'></script> -->
 <script type='text/javascript' src='vue.js'></script>
@@ -24,13 +51,20 @@
     const app = new Vue({
         el: '#app',
         data: {
-            isActive: true,
-            isRoyalblue: true,
-            royalblueString: "royalblue"
+            awesome: false,
+            isTemplateOk: false,
+            type: '',
+            loginType: 'username'
         },
         methods: {
             click1: function () {
                 console.log("click1 click");
+                console.log(this.loginType);
+                if (this.loginType === "username") {
+                    this.loginType = "email";
+                } else {
+                    this.loginType = "username";
+                }
             },
         }
     });
